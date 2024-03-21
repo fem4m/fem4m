@@ -1,0 +1,179 @@
+\documentclass[border=1pt]{standalone}
+
+% Copyright (c) 2026 by the fem4m authors
+
+% packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathptmx}
+\usepackage{eucal}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{fpu}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usetikzlibrary{colorbrewer}
+\usepgfplotslibrary{colorbrewer}
+\usepackage[x11names]{xcolor}
+\pagecolor{white}
+
+%\usepackage[T1]{fontenc}
+%\usepackage[sfdefault]{carlito}
+%\usepackage{mathastext}
+
+% global pgf options
+\pgfplotsset{
+  width=10cm,
+  compat=1.18,
+  tick label style={font=\small},
+  label style={font=\small},
+  legend style={font=\small}, %\footnotesize, \scriptsize, \tiny
+  every axis plot/.append style={line width=1pt, mark size=4pt},
+  cycle list/Set1,
+  cycle list/Set2,
+  cycle list/Set3,
+  cycle list/Accent,
+  cycle list/Pastel1,
+  cycle list/Pastel2,
+  cycle list/Dark2,
+  cycle list/Paired,
+  cycle list/Reds-3,
+  cycle list/Blues-3,
+  cycle list/Greens-3,
+  cycle list/Oranges-3,
+  cycle list/Purples-3,
+  cycle list/Greys-3
+}
+
+% markers
+\pgfplotscreateplotcyclelist{mark}{
+  {mark=x},{mark=+},{mark=asterisk},{mark=10-pointed star},
+  {mark=o},{mark=square},{mark=triangle},{mark=diamond}
+}
+
+% matlab
+\definecolor{Matlab-A}{rgb}{0.0000,0.4470,0.7410}
+\definecolor{Matlab-B}{rgb}{0.8500,0.3250,0.0980}
+\definecolor{Matlab-C}{rgb}{0.9290,0.6940,0.1250}
+\definecolor{Matlab-D}{rgb}{0.4940,0.1840,0.5560}
+\definecolor{Matlab-E}{rgb}{0.4660,0.6740,0.1880}
+\definecolor{Matlab-F}{rgb}{0.3010,0.7450,0.9330}
+\definecolor{Matlab-G}{rgb}{0.6350,0.0780,0.1840}
+
+\pgfplotscreateplotcyclelist{Matlab}{
+  {Matlab-A},{Matlab-B},{Matlab-C},{Matlab-D},{Matlab-E},{Matlab-F},{Matlab-G}
+}
+
+% fem4m
+\definecolor{fem4mRed}{RGB}{214,39,40}
+\definecolor{fem4mOrange}{RGB}{255,127,14}
+\definecolor{fem4mYellow}{RGB}{255,211,0}
+\definecolor{fem4mGreen}{RGB}{44,160,44} 
+\definecolor{fem4mCyan}{RGB}{23,190,207}
+\definecolor{fem4mBlue}{RGB}{31,119,180}
+\definecolor{fem4mMagenta}{RGB}{227,119,194}
+\definecolor{fem4mViolet}{RGB}{148,103,189}
+\pgfplotscreateplotcyclelist{fem4m}{
+  {fem4mRed},{fem4mOrange},{fem4mYellow},{fem4mGreen},{fem4mCyan},
+  {fem4mBlue},{fem4mMagenta},{fem4mViolet}
+}
+\definecolor{fem4mLightRed}{RGB}{255,102,102}
+\definecolor{fem4mLightOrange}{RGB}{255,178,102}
+\definecolor{fem4mLightYellow}{RGB}{255,230,128}
+\definecolor{fem4mLightGreen}{RGB}{102,204,102}
+\definecolor{fem4mLightCyan}{RGB}{128,222,222} 
+\definecolor{fem4mLightBlue}{RGB}{102,178,255}
+\definecolor{fem4mLightMagenta}{RGB}{255,153,204}
+\definecolor{fem4mLightViolet}{RGB}{178,153,229}
+\pgfplotscreateplotcyclelist{fem4mLight}{
+  {fem4mLightRed},{fem4mLightOrange},{fem4mLightYellow},{fem4mLightGreen},{fem4mLightCyan},
+  {fem4mLightBlue},{fem4mLightMagenta},{fem4mLightViolet}
+}
+
+% Draw a slope triangle in a log-log plot.
+%  #1: upper-left corner, x-coordinate
+%  #2: upper-left corner, y-coordinate
+%  #3: positive slope magnitude (triangle shows slope -#3)
+%  #4: horizontal size (in decades, e.g. 0.5 means ×10^{0.5})
+%  #5: tikz style, e.g. thick
+% Usage: \\logLogSlopeTriangleTop{x0}{y0}{s}{L}{style}
+% Example: \\logLogSlopeTriangleTop{1e-1}{1e-1}{2}{1}{thick}
+\newcommand{\logLogSlopeTriangleTop}[5]{%
+  \pgfplotsextra{%
+    \pgfkeys{/pgf/fpu=true, pgf/fpu/output format=fixed}
+    \pgfmathsetmacro{\xA}{#1}
+    \pgfmathsetmacro{\yA}{#2}
+    \pgfmathsetmacro{\xB}{\xA * 10^(#4)}
+    \pgfmathsetmacro{\yB}{\yA}
+    \pgfmathsetmacro{\xC}{\xB}
+    \pgfmathsetmacro{\yC}{\yA / 10^(#3 * #4)}
+    \pgfkeys{/pgf/fpu=false}
+    \draw[#5]
+      (\xA,\yA) -- node[pos=0.5,above=-2pt]{\small 1}
+      (\xB,\yB) -- node[pos=0.5,right=-2pt]{\small #3}
+      (\xC,\yC) -- cycle;
+  }
+}
+
+\newcommand{\logLogSlopeTriangleBottom}[5]{%
+  \pgfplotsextra{%
+    \pgfkeys{/pgf/fpu=true, pgf/fpu/output format=fixed}
+    \pgfmathsetmacro{\xA}{#1}
+    \pgfmathsetmacro{\yA}{#2}
+    \pgfmathsetmacro{\xC}{\xA * 10^(#4)}
+    \pgfmathsetmacro{\yC}{\yA / 10^(#3 * #4)}
+    \pgfmathsetmacro{\xB}{\xA}
+    \pgfmathsetmacro{\yB}{\yC}
+    \pgfkeys{/pgf/fpu=false}
+    \draw[#5]
+      (\xA,\yA) -- node[pos=0.5,left=-2pt]{\small #3}
+      (\xB,\yB) -- node[pos=0.5,below=-2pt]{\small 1}
+      (\xC,\yC) -- cycle;
+  }
+}
+
+% Begin document
+\begin{document}
+
+\begin{tikzpicture}
+  \begin{loglogaxis}[ %loglogaxis, semilogxaxis, semilogyaxis, axis
+    % Set1,Set2,Set3,Accent,Pastel1,Pastel2,Dark2,Paired,Matlab,fem4m,fem4mLight
+    cycle multiindex* list = {[8 of]mark\nextlist [8 of]fem4m \nextlist},
+    %cycle list shift=-5, %revers colors by setting to -(nplots-1)
+    %axis line style={draw=gray!80,thick},
+    %tick style={color=gray!80,thick},
+    %grid=both, %major, minor, both
+    %major grid style={draw=gray!80, thick, dash pattern=on 4pt off 2pt},   % color for major grid lines
+    %minor grid style={draw=gray!20, dash pattern=on 2pt off 1pt},          % color for minor grid lines
+    enlarge x limits=0.0, %0.1
+    enlarge y limits=0.0, %0.1
+    %xmin = 1,
+    %xmax = 1e8,
+    %ymin = 1e-8,
+    %ymax = 1e4,
+    xlabel={$N_\ell$},
+    %ylabel={error},
+    legend pos = south west, %north east, south west, outer north east
+    %legend style={at={(0.5,-0.15)},anchor=north},
+    legend cell align=left, %left, right, center
+    %transpose legend,
+    %legend columns=3,
+    %legend style={draw=gray, thick,fill=white, rounded corners=2pt},
+  ]
+  % Add different styles with: 
+  %  \pgfplotsset{cycle multiindex* list = {[3 of]mark\nextlist Blues-3\nextlist}}
+  %   \addplot+[option keys]
+  % keys:
+  %   -> dash pattern=on 2pt off 1pt (on 4pt off 2pt), mark options=solid
+  %   -> line width=1pt
+  %   -> mark size=4pt
+  %   -> mark=x,+,asterisk,10-pointed star,o,square,triangle,diamond,pentagon=
+  % colors: 
+  %   -> Set1-A,Set1-B,...,Matlab-A,...,Three-A-1,...
+  %   -> Set1-A!60!white
+  % triangle style:
+  %   -> thick, gray, fill=gray, draw=gray
+  \end{loglogaxis}
+\end{tikzpicture}
+
+\end{document}

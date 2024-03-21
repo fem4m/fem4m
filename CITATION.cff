@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "fem4m: A Finite Element Toolbox for MATLAB"
+type: software
+authors:
+  - family-names: Gedicke
+    given-names: Joscha
+    orcid: "https://orcid.org/0000-0002-8448-0608"
+    affiliation: "Institute for Numerical Simulation, University of Bonn"
+repository-code: "https://github.com/fem4m/fem4m"
+license: MIT
+version: "1.0"
+date-released: 2026-10-30
+abstract: >-
+        fem4m is a MATLAB toolbox for finite element methods in research and teaching. 
+        Weak forms are written as strings that read like the integrals they stand for, 
+        so a new discretization, error estimator or error norm is a single line. 
+        Behind the strings sit the finite element classes (Lagrange, hp, Crouzeix-Raviart, 
+        discontinuous Galerkin, Raviart-Thomas, Brezzi-Douglas-Marini, Nédélec, Argyris, 
+        Hellan-Herrmann-Johnson, Arnold-Winther, ...), adaptive meshes in 2D, 3D and on surfaces, 
+        multigrid and domain decomposition solvers, and several ready-made test problems, 
+        most of them with exact solutions.
+keywords:
+  - finite element method
+  - MATLAB

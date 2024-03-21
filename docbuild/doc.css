@@ -1,0 +1,135 @@
+/* fem4m documentation - styled after the MathWorks reference pages
+   (doc_center_base.css): orange page titles, grey purpose line, bold
+   section headings with a rule, light code panels. */
+
+:root {
+  color-scheme: light;     /* the MATLAB frame around third-party docs
+                              is always light, so the pages stay light */
+  --text: #212121;
+  --text-muted: #6a6a6a;
+  --heading: #404040;
+  --accent: #c05708;          /* MathWorks title / h3 orange */
+  --link: #0076a8;
+  --link-hover: #004b87;
+  --rule: #cbcbcb;
+  --rule-light: #e6e6e6;
+  --code-bg: #f6f6f6;
+  --code-border: #d3d3d3;
+  --syntax-bg: #fcfcfc;
+  --th-bg: #eaeaea;
+  --tag-bg: #eef2f6;
+  --tag-border: #ccd5df;
+  --note-bg: #f5f8fb;
+  --note-border: #0076a8;
+  --bg: #ffffff;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px; line-height: 1.43; color: var(--text);
+  background: var(--bg); margin: 0 auto; max-width: 64rem;
+  padding: 1rem 1.5rem 2rem;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+p { margin: 0 0 10px; }
+
+/* breadcrumb */
+nav.crumb { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+nav.crumb span { color: var(--text); }
+
+/* page title and purpose line */
+h1 {
+  color: var(--accent); font-size: 22px; font-weight: 400; line-height: 1.14;
+  margin: 0 0 6px; padding-bottom: 4px; border-bottom: 1px solid var(--rule);
+}
+h1 .sub { color: var(--text-muted); font-size: 15px; margin-left: 0.4em; }
+.purpose_line {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; color: var(--text-muted); font-size: 15px; margin-bottom: 14px;
+}
+.reftype {
+  font-size: 12px; color: var(--text-muted); white-space: nowrap;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+p.purpose { color: var(--text-muted); margin: 0 0 8px; }
+.class_meta { font-size: 13px; margin: -6px 0 14px; }
+.class_meta .label, .inherit { color: var(--text-muted); }
+.inherit { font-size: 13px; }
+
+/* section headings */
+h2 {
+  color: var(--heading); font-size: 17px; font-weight: 700; line-height: 1.35;
+  margin: 26px 0 8px; padding-top: 5px; border-bottom: 1px solid var(--rule);
+}
+h3 {
+  color: var(--accent); font-size: 15px; font-weight: 700;
+  margin: 16px 0 6px; padding-top: 5px;
+}
+
+/* code */
+code, pre, var { font-family: Menlo, Monaco, Consolas, "Courier New", monospace; }
+code { font-size: 13px; }
+var { font-style: italic; }
+pre {
+  font-size: 13px; line-height: 1.4; background: var(--code-bg);
+  border: 1px solid var(--code-border); padding: 10px; margin: 0 0 14px;
+  overflow-x: auto;
+}
+pre.helptext { background: transparent; border: none; padding: 2px 0 2px 12px; }
+
+/* Syntax block: one call per line, linked to its description item */
+.syntax_block {
+  background: var(--syntax-bg); border: 1px solid var(--rule-light);
+  padding: 7px 15px; margin: 0 0 14px;
+}
+.syntax_line { padding: 2px 0; }
+.syntax_line code { white-space: pre; }
+.syntax_line a code { color: var(--link); }
+
+/* Description items: call in bold code, then the prose */
+.description_item { border-top: 1px solid var(--rule-light); padding: 10px 0 2px; }
+h3 + .description_item, h2 + .description_item { border-top: none; padding-top: 4px; }
+code.sig { font-weight: 700; margin-right: 0.35em; }
+.description_item:target { background: var(--note-bg); }
+
+/* tables */
+table { border-collapse: collapse; margin: 6px 0 12px; font-size: 92%; width: 100%; }
+th, td {
+  border: 1px solid var(--rule); padding: 4px 8px; text-align: left;
+  vertical-align: top;
+}
+th { background: var(--th-bg); font-weight: 700; }
+table.members td:first-child { width: 32%; white-space: nowrap; }
+
+.tag {
+  font-size: 11px; color: var(--text-muted); background: var(--tag-bg);
+  border: 1px solid var(--tag-border); border-radius: 3px;
+  padding: 0 0.3rem; margin-left: 0.3rem; white-space: nowrap;
+}
+.note {
+  background: var(--note-bg); border-left: 3px solid var(--note-border);
+  padding: 8px 12px; margin: 0 0 14px;
+}
+
+/* Method Details */
+.method_detail { border-top: 1px solid var(--rule-light); padding-top: 4px; margin-bottom: 18px; }
+h2 + .method_detail { border-top: none; }
+.method_detail h3 { margin-bottom: 2px; }
+.method_detail h3 code { font-size: 15px; }
+
+/* lists */
+ul.related, ul.tips { margin: 4px 0 12px; padding-left: 1.4rem; }
+ul.related li, ul.tips li { margin: 3px 0; }
+.exname { color: var(--text-muted); font-size: 12px; }
+p.seealso code { font-size: 13px; }
+
+footer {
+  margin-top: 2.5rem; padding-top: 6px; border-top: 1px solid var(--rule-light);
+  font-size: 12px; color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  body { padding: 0.75rem 1rem 1.5rem; }
+  .purpose_line { flex-direction: column; gap: 2px; }
+  table.members td:first-child { white-space: normal; }
+}
