@@ -12,6 +12,7 @@
   <img alt="MATLAB R2026a+" src="https://img.shields.io/badge/MATLAB-R2026a%2B-0076A8">
   <img alt="31 examples" src="https://img.shields.io/badge/examples-31-orange">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow">
+  <a href="https://doi.org/10.5281/zenodo.23810422"><img alt="DOI 10.5281/zenodo.23810422" src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23810422-blue"></a>
 </p>
 
 <p align="center">
@@ -199,6 +200,7 @@ If you use fem4m in your research, please cite it (see also [`CITATION.cff`](CIT
   title        = {fem4m: A Finite Element Toolbox for {MATLAB}},
   year         = {2026},
   version      = {1.0},
+  doi          = {10.5281/zenodo.23810422},
   howpublished = {\url{https://github.com/fem4m/fem4m}}
 }
 ```

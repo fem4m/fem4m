@@ -7,6 +7,7 @@ authors:
     given-names: Joscha
     orcid: "https://orcid.org/0000-0002-8448-0608"
     affiliation: "Institute for Numerical Simulation, University of Bonn"
+doi: 10.5281/zenodo.23810422
 repository-code: "https://github.com/fem4m/fem4m"
 license: MIT
 version: "1.0"
